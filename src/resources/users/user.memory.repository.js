@@ -14,4 +14,12 @@ const create = async user => {
   return DB.createUser(user);
 };
 
-module.exports = { getAll, get, create };
+const update = async user => {
+  return DB.updateUser(user);
+};
+
+const deleteUser = async id => {
+  return DB.deleteUser(id);
+};
+
+module.exports = { getAll, get, create, update, deleteUser };

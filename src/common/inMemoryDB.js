@@ -11,4 +11,16 @@ const createUser = async user => {
   DB.push(user);
   return user;
 };
-module.exports = { getAllUsers, getUser, createUser };
+
+// const updateUser = async user =>{
+//
+// };
+
+//const deleteUser = async id => DB.filter(el => el.id !== id)[0];
+
+const deleteUser = async id =>{
+  console.log(id);
+  return DB.filter(el => el.id !== id).slice(0);
+}
+
+module.exports = { getAllUsers, getUser, createUser, deleteUser };

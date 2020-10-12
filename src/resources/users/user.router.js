@@ -29,7 +29,25 @@ router.route('/').post(async (req, res) => {
   res.json(User.toResponse(user));
 });
 
-router.route('/:id').put((req, res) => {
-  throw Error('jhj');
+router.route('/:id').put(async (req, res) => {
+  try {
+    const user = await usersService.update(req.params.id);
+    // map user fields to exclude secret fields like "password"
+    res.json(User.toResponse(user));
+  } catch (e) {
+    res.sendStatus(404).send(e.message());
+  }
+  //throw Error('jhj');
 });
+
+router.route('/:id').delete(async (req, res) => {
+  try {
+    const users = await usersService.deleteUser(req.params.id);
+    // map user fields to exclude secret fields like "password"
+    res.json(users.map(User.toResponse));
+  } catch (e) {
+    res.sendStatus(404).send(e.message());
+  }
+});
+
 module.exports = router;
